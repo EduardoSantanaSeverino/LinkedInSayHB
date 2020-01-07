@@ -13,7 +13,7 @@ The message will be:
 > Happy birthday! <Contact_Firsts_name_> I hope you have a wonderful day.
 
 # How to use it: 
-First, run the App from your CMD console:
+First, build the project with **dotnet** then go to the path **LinkedInSayHB\Code\LinkedInSayHB\bin\Debug\netcoreapp2.2** on your terminal, and run the App (CMD console):
 > dotnet LinkedInSayHB.dll Param1 Param2 Param3
 
 Where
