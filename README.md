@@ -14,7 +14,7 @@ The message will be:
 
 # How to use it: 
 First, run the App from your CMD console:
-> LinkedInSayHB.exe Param1 Param2 Param3
+> dotnet LinkedInSayHB.dll Param1 Param2 Param3
 
 Where
 **Param1:** the console will expect the first parameter, which is the email account that we will use to connect.
