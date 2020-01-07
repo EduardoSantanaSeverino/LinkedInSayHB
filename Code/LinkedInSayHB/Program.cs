@@ -32,19 +32,31 @@ namespace LinkedInSayHB
                 driver.Navigate().GoToUrl("https://www.linkedin.com/notifications/");
                 
                 Task.Delay(timeOutDelay).Wait();
-             
-                try
+
+                var countCelebrating = 0;
+                bool checkSeeCelebrating = true;
+                while (checkSeeCelebrating)
                 {
-                    driver.FindElement(By.XPath("//span[text() = \"See who's celebrating\"]"),timeOutInSeconds).Click();
+                    try
+                    {
+                        driver.FindElement(By.XPath("//span[text() = \"See who's celebrating\"]"), timeOutInSeconds).Click();
+                        checkSeeCelebrating = false;
+                    }
+                    catch (Exception e)
+                    {
+                        checkSeeCelebrating = true;
+                        IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                        js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
+                        Task.Delay(timeOutDelay).Wait();
+                        countCelebrating++;
+                        if (countCelebrating > 20)
+                        {
+                            Console.WriteLine("End because button not found!");
+                            return;
+                        }
+                    }
                 }
-                catch (Exception e)
-                {
-                    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                    js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
-                    Task.Delay(timeOutDelay).Wait();
-                    driver.FindElement(By.XPath("//span[text() = \"See who's celebrating\"]"),timeOutInSeconds).Click();
-                }
-             
+
                 Task.Delay(timeOutDelay).Wait();
                 var nameList = driver.FindElements(By.CssSelector("article a.nt-card__headline"),timeOutInSeconds);
                 var alreadySent = driver.FindElements(By.CssSelector("article div.t-14.t-black--light"),timeOutInSeconds).ToArray().Select(item => item.Text);
@@ -61,13 +73,13 @@ namespace LinkedInSayHB
                 foreach (var item in nameList.ToArray())
                 {
                     string name = "";
-                    bool staleElement = true; 
-                    while(staleElement){
+                    bool checkName = true; 
+                    while(checkName){
                         try{
                             name = item.Text;
-                            staleElement = false;
+                            checkName = false;
                         } catch(StaleElementReferenceException e){
-                            staleElement = true;
+                            checkName = true;
                         }
                     }
                     
