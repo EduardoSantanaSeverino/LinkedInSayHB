@@ -4,7 +4,7 @@
 This tool was developed with the initiative of sending a Happy Birthday greeting to your connections on LinkedIn.
 
 # Variables: 
-The application will request to connect to your LinkedIn account, for that purpose, you need to put your User (email), Password, and if add a custom message. If you leave that field Blank the greeting will look like:
+The application will request to connect to your LinkedIn account, for that purpose, you need to put your **User (email)**, **Password**, and if add a **custom message**. If you leave that field Blank the greeting will look like:
 > Happy birthday! <Contact_Firsts_name_> Best wishes!
 
 If you add a personal message the only section that may be edit should be "Best wishes".
